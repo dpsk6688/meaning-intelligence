@@ -1,0 +1,22 @@
+variable,type,level,description,allowed_values,missing_codes,role,notes
+episode_id,string,episode,唯一决策 episode 标识,,,id,主键
+model_id,string,model,模型版本标识,,,group,随机效应分组
+task_id,string,task,任务标识,,,group,随机效应分组
+condition,categorical,episode,实验条件,baseline;active_control;recursive,,treatment,主要自变量
+round,integer,round,决策轮次,1-40,,time,每轮记录
+action,string,round,行动编码,,,process,需任务环境定义
+immediate_reward,float,round,即时收益,,,outcome,用于 CNU
+intervention_cost,float,round,干预成本,,,cost,时间/token/信息成本
+cumulative_net_utility,float,episode,累积净效用 CNU,,,primary_endpoint,任务内标准化后再汇总
+final_state_value,float,episode,最终状态价值,,,outcome,用于 CNU
+irreversible_error,binary,episode,是否发生重大不可逆错误,0;1,,secondary_endpoint,
+brier_score,float,episode,预测校准,,,secondary_endpoint,
+weakest_stakeholder_utility,float,episode,最弱利益相关者最终效用,,,secondary_endpoint,
+recursive_rounds,integer,episode,实际递归轮数,,,process,主动控制应为 1
+stop_triggered,binary,episode,是否触发停止规则,0;1,,process,
+invalid_episode,binary,episode,是否无效,0;1,,exclusion,预注册固定
+invalid_reason,string,episode,无效原因,,,exclusion,
+randomization_seed,string,episode,随机种子,,,reproducibility,
+api_date,date,episode,API 日期,,,reproducibility,
+temperature,float,episode,温度,,,reproducibility,
+system_prompt_hash,string,episode,系统提示哈希,,,reproducibility,
