@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>MI 日常助手 | 个人意义智能自检</title>
+    <!-- PWA 相关配置 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f1115">
+    
+    <style>
+        :root {
+            --bg: #0f1115; --panel: #1a1d24; --text: #e2e8f0;
+            --accent: #3b82f6; --border: #2d3748; --success: #10b981; --danger: #ef4444;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; padding-bottom: 80px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* 顶部导航栏 */
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 20px; }
+        h1 { font-weight: 300; letter-spacing: 1px; font-size: 1.4rem; margin: 0; }
+        .history-btn { background: var(--panel); border: 1px solid var(--border); color: var(--accent); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
+        
+        /* 场景切换器 */
+        .scene-selector { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 15px; scrollbar-width: none; }
+        .scene-btn { flex: 1; min-width: 100px; background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 10px; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; white-space: nowrap; }
+        .scene-btn.active { border-color: var(--accent); background: rgba(59, 130, 246, 0.1); color: var(--accent); font-weight: bold; }
+        
+        .step-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: all 0.3s; }
+        .step-card.disabled { opacity: 0.3; pointer-events: none; }
+        .layer-badge { background: var(--accent); color: #fff; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-right: 10px; }
+        
+        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media (min-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
+        
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.9rem; color: #94a3b8; margin-bottom: 6px; }
+        input[type="text"], textarea { width: 100%; background: #0f1115; border: 1px solid var(--border); color: var(--text); padding: 12px; border-radius: 8px; font-size: 1rem; }
+        input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+        textarea { resize: vertical; min-height: 100px; }
+        
+        button { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; transition: background 0.2s; }
+        button:hover { background: #2563eb; }
+        
+        .result-box { background: #1e293b; border-left: 4px solid var(--success); padding: 20px; border-radius: 8px; margin-top: 20px; white-space: pre-wrap; font-size: 0.95rem; }
+        .tip { font-size: 0.85rem; color: #64748b; font-style: italic; margin-top: 8px; }
+        
+        /* 历史记录抽屉 */
+        .drawer { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; background: var(--panel); box-shadow: -5px 0 15px rgba(0,0,0,0.5); transition: right 0.3s ease; z-index: 1000; padding: 20px; overflow-y: auto; }
+        .drawer.open { right: 0; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px; }
+        .history-item { background: #0f1115; border: 1px solid var(--border); padding: 12px; border-radius: 6px; margin-bottom: 10px; cursor: pointer; }
+        .history-item:hover { border-color: var(--accent); }
+        .history-date { font-size: 0.75rem; color: #64748b; margin-bottom: 5px; }
+        .history-text { font-size: 0.9rem; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🧭 MI 日常助手</h1>
+        <button class="history-btn" onclick="toggleDrawer()">📁 历史记录</button>
+    </div>
+    
+    <!-- 场景选择 -->
+    <div class="scene-selector">
+        <div class="scene-btn active" onclick="switchScene('work', this)">💼 工作复盘</div>
+        <div class="scene-btn" onclick="switchScene('study', this)">📚 学习卡点</div>
+        <div class="scene-btn" onclick="switchScene('life', this)">🌱 人生选择</div>
+    </div>
+
+    <!-- L1 -->
+    <div class="step-card" id="stepL1">
+        <h2><span class="layer-badge">L1 减负</span> <span id="sceneTitle">工作复盘</span></h2>
+        <div class="input-group">
+            <label id="scenePrompt">今天的工作中，让你感到最内耗或卡住的事情是什么？</label>
+            <textarea id="rawInput"></textarea>
+        </div>
+        <button onclick="processL1()">拆解问题</button>
+    </div>
+
+    <!-- L2 & L3 -->
+    <div class="step-card disabled" id="stepL2L3">
+        <h2><span class="layer-badge">L2-3 可体验</span> 明确方向、价值与边界</h2>
+        <div class="grid">
+            <div>
+                <h3 style="color:#cbd5e1; margin-bottom:10px;">路径 A</h3>
+                <div class="input-group"><label>方向</label><input type="text" id="dirA" placeholder="例：坚持推进"></div>
+                <div class="input-group"><label>价值</label><input type="text" id="valA" placeholder="例：证明能力"></div>
+                <div class="input-group"><label>边界</label><input type="text" id="boundA" placeholder="例：再熬夜两天没结果就停"></div>
+            </div>
+            <div>
+                <h3 style="color:#cbd5e1; margin-bottom:10px;">路径 B</h3>
+                <div class="input-group"><label>方向</label><input type="text" id="dirB" placeholder="例：及时止损"></div>
+                <div class="input-group"><label>价值</label><input type="text" id="valB" placeholder="例：保护精力"></div>
+                <div class="input-group"><label>边界</label><input type="text" id="boundB" placeholder="例：被领导批评就放弃"></div>
+            </div>
+        </div>
+        <button onclick="processL3()">生成自检报告并保存</button>
+    </div>
+
+    <!-- L4 & L5 & L6 -->
+    <div class="step-card disabled" id="stepL5L6">
+        <h2><span class="layer-badge">L4-6 评估与反思</span> 最终决定与防线</h2>
+        <div class="result-box" id="finalReport"></div>
+        <p class="tip" style="margin-top:15px; color:#f59e0b;">注：助手不为你做决定。请阅读上述反思，由你自己选定最终方向。</p>
+    </div>
+</div>
+
+<!-- 历史记录抽屉 -->
+<div class="drawer" id="historyDrawer">
+    <div class="drawer-header">
+        <h2 style="margin:0; font-size:1.2rem;">历史记录</h2>
+        <button style="width:auto; padding:5px 10px; background:var(--border);" onclick="toggleDrawer()">关闭</button>
+    </div>
+    <div id="historyList"></div>
+</div>
+
+<script>
+    const scenes = {
+        work: { title: "工作复盘", prompt: "今天的工作中，让你感到最内耗或卡住的事情是什么？" },
+        study: { title: "学习卡点", prompt: "在学习新知识或技能时，目前最大的阻碍是什么？" },
+        life: { title: "人生选择", prompt: "在生活的某个十字路口，你现在面临的纠结是什么？" }
+    };
+
+    function switchScene(key, btn) {
+        document.querySelectorAll('.scene-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('sceneTitle').innerText = scenes[key].title;
+        document.getElementById('scenePrompt').innerText = scenes[key].prompt;
+        document.getElementById('rawInput').value = '';
+        document.getElementById('stepL2L3').classList.add('disabled');
+        document.getElementById('stepL5L6').classList.add('disabled');
+    }
+
+    let state = { A: {}, B: {} };
+
+    function processL1() {
+        if(!document.getElementById('rawInput').value) return alert('请先写下你的困扰');
+        document.getElementById('stepL2L3').classList.remove('disabled');
+        document.getElementById('stepL2L3').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function evaluateEvidence(val, bound) {
+        if(!bound) return "E0 (缺乏边界)";
+        if(bound.length > 4 && val.length > 4) return "E3 (边界与价值清晰)";
+        return "E2 (有止损机制)";
+    }
+
+    function processL3() {
+        state.A = { dir: document.getElementById('dirA').value || "未填", val: document.getElementById('valA').value || "未填", bound: document.getElementById('boundA').value || "" };
+        state.B = { dir: document.getElementById('dirB').value || "未填", val: document.getElementById('valB').value || "未填", bound: document.getElementById('boundB').value || "" };
+        state.A.ev = evaluateEvidence(state.A.val, state.A.bound);
+        state.B.ev = evaluateEvidence(state.B.val, state.B.bound);
+
+        let report = `【L3-L4 结构化对比】\n🅰️ 路径 A：去【${state.A.dir}】，因为【${state.A.val}】\n   └ 防御评估: ${state.A.ev}\n🅱️ 路径 B：去【${state.B.dir}】，因为【${state.B.val}】\n   └ 防御评估: ${state.B.ev}\n\n【L6 递归灵魂拷问】\n1. 如果选 A：当边界【${state.A.bound || '未设定'}】被打破时，你愿意认输吗？\n2. 如果选 B：当边界【${state.B.bound || '未设定'}】被打破时，你的 Plan B 是什么？\n3. 假设一年后都失败了，你更能接受哪种“失败”？\n4. 你现在是不敢选 A，还是不想选 B？`;
+
+        document.getElementById('finalReport').innerText = report;
+        document.getElementById('stepL5L6').classList.remove('disabled');
+        document.getElementById('stepL5L6').scrollIntoView({ behavior: 'smooth' });
+
+        // 保存到本地
+        saveToHistory(report);
+    }
+
+    // --- 本地存储逻辑 ---
+    function saveToHistory(report) {
+        const history = JSON.parse(localStorage.getItem('mi_history') || '[]');
+        const record = {
+            id: Date.now(),
+            date: new Date().toLocaleString(),
+            title: document.getElementById('sceneTitle').innerText,
+            raw: document.getElementById('rawInput').value,
+            report: report
+        };
+        history.unshift(record); // 最新在前面
+        localStorage.setItem('mi_history', JSON.stringify(history));
+        renderHistory();
+    }
+
+    function renderHistory() {
+        const history = JSON.parse(localStorage.getItem('mi_history') || '[]');
+        const list = document.getElementById('historyList');
+        if(history.length === 0) {
+            list.innerHTML = '<p style="color:#64748b; text-align:center;">暂无历史记录</p>';
+            return;
+        }
+        list.innerHTML = history.map(h => `
+            <div class="history-item" onclick="loadHistory(${h.id})">
+                <div class="history-date">${h.date} · ${h.title}</div>
+                <div class="history-text">${h.raw}</div>
+            </div>
+        `).join('');
+    }
+
+    function loadHistory(id) {
+        const history = JSON.parse(localStorage.getItem('mi_history') || '[]');
+        const record = history.find(h => h.id === id);
+        if(record) {
+            document.getElementById('rawInput').value = record.raw;
+            document.getElementById('finalReport').innerText = record.report;
+            document.getElementById('stepL5L6').classList.remove('disabled');
+            toggleDrawer();
+            document.getElementById('stepL5L6').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function toggleDrawer() {
+        document.getElementById('historyDrawer').classList.toggle('open');
+        renderHistory();
+    }
+
+    // 初始化
+    renderHistory();
+</script>
+</body>
+</html>
