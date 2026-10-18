@@ -1,367 +1,205 @@
-# ============================================================================
-# hypotheses.yaml
-# Meaning Intelligence — Hypothesis Registry
-# ============================================================================
-# Source of truth: 《意义智能：意义文明的认知操作系统》V7.0
-#   第6章 核心命题体系（H1-H18）
-#   附录D 核心命题反证矩阵
-#   附录E 实验协议（MC²P-01 至 MC²P-04）
-# 本文件从正典抽取关键字段，供外人与 CI 核对，不替代正典原文。
-# ============================================================================
-
-schema_version: 1
-canon_version: "V7.0"
-source_sections:
-  - "第6章：核心命题体系 —— 可检验假设卡片"
-  - "附录D：核心命题反证矩阵（V7.0 升级版）"
-  - "附录E：实验协议（MC²P-01 至 04）"
-last_synced: "2026-10-10"
-
-# 状态与等级
-# Evidence Level (E0-E6) 定义见 docs/evidence.md
-# Status: Draft | Formalized | Under Test | Survived | Falsified | Withdrawn
-
+schema_version: 0.3.0
+canon_version: V7.0
 hypotheses:
-
-  # ---------------------------------------------------------------- 本体论 (H1-H3)
-  H1:
-    name: "意义智能必要性假说"
-    name_en: "MI Necessity"
-    proposition: >
-      意义智能是智能系统的必要元层，无法被其他智能替代。
-    category: "ontological"
-    layer: L1   # 正典未显式标注层;此处按 glossary 引用归类
-    core_constructs: ["MI", "元智能"]
-    operational_definition: >
-      MI 能力 = 系统在复杂决策中主动进行方向性价值判断的频率与准确性。
-    variables:
-      independent: "系统是否具备 MI 模块（有/无）"
-      dependent: "长期决策方向漂移率"
-    falsifier: >
-      若在对照实验中，无 MI 模块的系统在 10 年模拟决策中的方向漂移率
-      ≤ 有 MI 模块的系统（效应量 d < 0.3，p > 0.05，统计功效 ≥ 0.80），
-      则 H1 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "实验 MC²P-03（MI-AI 对照实验）"
-
-  H2:
-    name: "意义不可还原性假说"
-    name_en: "Irreducibility of Meaning"
-    proposition: >
-      意义判断具有多尺度、多维度的不可还原性。
-    category: "ontological"
-    layer: L3
-    core_constructs: ["意义", "可还原性"]
-    operational_definition: >
-      若意义判断可被单一维度（如效用计算或情感反应）完全解释，则为可还原。
-    falsifier: >
-      若在任何实证研究中，意义判断的方差可被单一维度解释 > 90%，
-      则 H2 被证伪。
-    evidence_level: "E0"
-    status: "Formalized"
-    verification_route: "因子分析 + 多维度量表验证"
-
-  H3:
-    name: "无 MI 方向漂移假说"
-    name_en: "No-MI Direction Drift"
-    proposition: >
-      任何智能系统，若缺乏 MI 层，其长期决策必然出现方向性漂移。
-    category: "ontological"
-    layer: L1
-    core_constructs: ["方向漂移率"]
-    operational_definition: >
-      系统决策方向与其初始声明方向之间的累积偏离度（时间加权）。
-    falsifier: >
-      若发现一个长期运行（> 10 年）的智能系统无 MI 层但方向漂移率 < 5%/年，
-      则 H3 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "模拟实验 + 历史案例分析"
-
-  # ---------------------------------------------------------------- 动力学 (H4-H6)
-  H4:
-    name: "势能驱动行动假说"
-    name_en: "Potential Drives Action"
-    proposition: >
-      意义势能驱动系统行动，行动反馈改变意义结构。
-    category: "dynamical"
-    layer: L4
-    core_constructs: ["意义势能 PE"]
-    operational_definition: "PE = αA − βC − γG − δM（动态方程）"
-    falsifier: >
-      若观察到 PE 高位状态下系统无行动意愿（行动意图评分 < 3/10），
-      或行动后意义结构未发生可测变化（PE 变化 < 5%），则 H4 被证伪。
-    evidence_level: "E2"
-    status: "Under Test"
-    verification_route: "实验 MC²P-01 + 纵向观察"
-
-  H5:
-    name: "稳定性-适应性倒 U 型假说"
-    name_en: "Inverted-U Stability-Adaptability"
-    proposition: >
-      意义方向的稳定性与适应性之间存在倒 U 型关系。
-    category: "dynamical"
-    layer: L5   # 按 glossary: L5 锚点
-    core_constructs: ["稳定性", "适应性"]
-    falsifier: >
-      若实证数据显示稳定性和适应性之间呈线性正相关（r > 0.7）
-      或线性负相关（r < −0.7），则 H5 被证伪。
-    evidence_level: "E0"
-    status: "Formalized"
-    verification_route: "大规模问卷调查 + 组织研究"
-
-  H6:
-    name: "螺旋速率与意义危机假说"
-    name_en: "Spiral Rate and Meaning Crisis"
-    proposition: >
-      螺旋上升速率过快（狂热）或过慢（冷漠）均导致意义危机。
-    category: "dynamical"
-    layer: L6
-    core_constructs: ["螺旋速率", "意义危机指数"]
-    operational_definition: "螺旋速率 = 每单位时间内的意义深度增量（SD/t）"
-    falsifier: >
-      若观察到某系统螺旋速率极快（> 2 SD/月）但未出现可测意义危机
-      （意义危机指数 < 3/10），或极慢（< 0.1 SD/年）但意义状态健康
-      （意义危机指数 < 3/10），则 H6 被证伪。
-    evidence_level: "E0"
-    status: "Formalized"
-    verification_route: "纵向追踪研究"
-
-  # ---------------------------------------------------------------- 尺度关系 (H7-H9)
-  H7:
-    name: "跨尺度一致性-生存假说"
-    name_en: "Cross-Scale Consistency and Survival"
-    proposition: >
-      跨尺度意义一致性越高，系统长期生存概率越高。
-    category: "scale"
-    layer: L5
-    core_constructs: ["跨尺度意义一致性指数"]
-    operational_definition: >
-      跨尺度意义一致性指数 = 各尺度意义方向向量的平均夹角余弦。
-    falsifier: >
-      若发现两个尺度意义长期不一致（一致性指数 < 0.5）但各尺度生存概率
-      高于一致性高的对照组，则 H7 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "历史比较研究"
-
-  H8:
-    name: "尺度背离-危机假说"
-    name_en: "Scale Divergence and Crisis"
-    proposition: >
-      若两尺度意义方向长期背离，则其中至少一个尺度将出现意义危机。
-    category: "scale"
-    layer: L5
-    core_constructs: ["尺度背离", "意义危机"]
-    falsifier: >
-      若观察到两个尺度长期背离（> 10 年，一致性指数 < 0.4）
-      但均未出现可测意义危机，则 H8 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "历史案例系统检验"
-
-  H9:
-    name: "冲突校准假说"
-    name_en: "Conflict Calibration"
-    proposition: >
-      尺度间冲突若无法通过元意义层校准，将导致系统分裂。
-    category: "scale"
-    layer: L5
-    falsifier: >
-      若观察到无法通过元意义层校准的冲突最终通过其他方式（如强制统一）
-      解决且未导致分裂，则 H9 被证伪。
-    evidence_level: "E0"
-    status: "Formalized"
-    verification_route: "案例研究 + 比较分析"
-
-  # ---------------------------------------------------------------- 工程化 (H10-H12)
-  H10:
-    name: "变量可测性假说"
-    name_en: "Measurability of Variables"
-    proposition: >
-      MI 的核心变量可在 5 年内实现可操作化测量（信度 > 0.7）。
-    category: "engineering"
-    layer: L4
-    falsifier: >
-      若到 2031 年，核心变量（MC、BS、SD 等）仍无线下可用的信度 > 0.7
-      的量表，则 H10 被证伪。
-    evidence_level: "E2"
-    status: "Under Test"
-    verification_route: "量表开发与信效度验证"
-
-  H11:
-    name: "MI-AI 优势假说"
-    name_en: "MI-AI Advantage"
-    proposition: >
-      基于 MI 的决策辅助系统，能在特定领域超过人类专家组的长期方向判断。
-    category: "engineering"
-    layer: L4
-    falsifier: >
-      若在连续 3 次对照实验中，MI 辅助决策不优于或劣于人类专家组决策
-      （d < 0.3，p > 0.05），则 H11 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "实验 MC²P-03"
-
-  H12:
-    name: "归零防僵化假说"
-    name_en: "Zeroing Prevents Ossification"
-    proposition: >
-      主动归零是防止系统意义僵化的有效手段。
-    category: "engineering"
-    layer: L6
-    falsifier: >
-      若观察到某系统实施了主动归零但意义僵化程度未缓解（僵化指数变化 < 5%）
-      或加剧，则 H12 被证伪。
-    evidence_level: "E2"
-    status: "Under Test"
-    verification_route: "对照实验 + 纵向观察"
-
-  # ---------------------------------------------------------------- 三特性 (H13-H15)
-  H13:
-    name: "元认知-判断质量假说"
-    name_en: "Metacognition and Judgment Quality"
-    proposition: >
-      元认知觉察训练能显著提升个体的意义判断质量。
-    category: "three_properties"
-    layer: L6
-    falsifier: >
-      若随机对照实验显示训练组与对照组在意义判断质量上无显著差异
-      （d < 0.3，p > 0.05），则 H13 被证伪。
-    evidence_level: "E2"
-    status: "Under Test"
-    verification_route: "实验 MC²P-02"
-
-  H14:
-    name: "无归零-僵化假说"
-    name_en: "No Zeroing Leads to Ossification"
-    proposition: >
-      缺乏主动归零机制的系统，其螺旋上升终将停滞并转向僵化。
-    category: "three_properties"
-    layer: L6
-    falsifier: >
-      若发现一个长期运行（> 20 年）、无主动归零机制的系统，
-      其意义螺旋持续上升（SD 持续 > 0）未停滞，则 H14 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "纵向观察研究"
-
-  H15:
-    name: "三特性协同假说"
-    name_en: "Three-Property Synergy"
-    proposition: >
-      三特性（MCA/SA/AZ）协同作用的效果优于任一特性单独作用。
-    category: "three_properties"
-    layer: L6
-    falsifier: >
-      若析因实验显示三特性协同组与最优单一特性组无显著差异
-      （d < 0.3，p > 0.05），则 H15 被证伪。
-    evidence_level: "E0"
-    status: "Formalized"
-    verification_route: "析因实验 MC²P-04"
-
-  # ---------------------------------------------------------------- 文明级 (H16-H18)
-  H16:
-    name: "系缚-健康假说"
-    name_en: "Binding and Health"
-    proposition: >
-      文明的健康状态可用四维度（C/V/E/A）系缚强度（BS）来表征。
-    category: "civilizational"
-    layer: L5
-    falsifier: >
-      若某文明 BS 较高（> 0.8）但历史记录显示其处于明显衰退期，
-      或 BS 低（< 0.4）但处于繁荣期，则 H16 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "文明史比较研究"
-
-  H17:
-    name: "转型-归零重构假说"
-    name_en: "Transformation as Zeroing-Restructuring"
-    proposition: >
-      文明级重大转型均可被解释为四维度的系统归零与螺旋重构。
-    category: "civilizational"
-    layer: L6
-    falsifier: >
-      若任何一个公认的重大文明转型（轴心时代、文艺复兴、启蒙、生态转向）
-      不符合归零-重构模型（经 3 位独立历史学家认定），则 H17 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "历史系统分析"
-
-  H18:
-    name: "当代窗口假说"
-    name_en: "Contemporary Window"
-    proposition: >
-      当代人类文明正处于文明级归零与螺旋重构的窗口期。
-    category: "civilizational"
-    layer: L5   # 文明尺度
-    falsifier: >
-      若到 2050 年，人类文明未经历任何意义上的重大意义框架转向
-      （经全球调查，> 60% 受访者认为"文明方向未发生根本变化"），
-      则 H18 被证伪。
-    evidence_level: "E1"
-    status: "Formalized"
-    verification_route: "持续观察 + 全球调查"
-
-# ============================================================================
-# 理论失败矩阵 (附录 D.7)
-# 每个模块达到失败阈值后的操作：标记或删除，而不是辩护。
-# ============================================================================
-failure_matrix:
-  - module: "SG 假说"
-    support: "与危机正相关"
-    partial_support: "特定时期相关"
-    failure_threshold: "3 个历史时期无显著相关"
-    post_failure_action: "重参或放弃"
-  - module: "Spectrum Spiral"
-    support: "Leap 可被 R/S/T 检测"
-    partial_support: "部分跃迁符合"
-    failure_threshold: "90% 以上变化无法捕获"
-    post_failure_action: "修改或放弃"
-  - module: "Witness→Leap"
-    support: "训练后 Leap ↑"
-    partial_support: "特定人群有效"
-    failure_threshold: "RCT 无显著差异"
-    post_failure_action: "放弃有效性"
-  - module: "MI-AI 优势"
-    support: "决策质量 ↑"
-    partial_support: "特定领域有效"
-    failure_threshold: "3 次实验均无优势"
-    post_failure_action: "修改或放弃"
-  - module: "Weaving Sovereignty"
-    support: "五项权利→自主性 ↑"
-    partial_support: "特定环境有效"
-    failure_threshold: "跨 5 种环境均无效"
-    post_failure_action: "重构理论"
-
-# ============================================================================
-# 实验协议 (附录 E)
-# ============================================================================
-experimental_protocols:
-  - id: MC²P-01
-    name: "Perspective Flexibility Trial"
-    status: "协议已预注册模板"
-  - id: MC²P-02
-    name: "Witness Metacognition Trial"
-    status: "协议已预注册模板;进行中 (H13)"
-  - id: MC²P-03
-    name: "Meaning Intelligence Decision Trial"
-    status: "协议已预注册模板;设计完成 (H1, H11)"
-  - id: MC²P-04
-    name: "Three Properties Synergy Trial"
-    status: "协议已预注册模板 (H15)"
-
-# ============================================================================
-# 统计标准说明
-# ============================================================================
-statistical_conventions:
-  note: >
-    正典使用 d < 0.3 / p > 0.05 作为证伪条件。B2 阶段将改写为等效性检验
-    （见 docs/equivalence-tests.md）。
-  current:
-    effect_size_threshold: 0.3
+- id: L1-H1
+  scope: layer
+  layer: L1
+  status: registered
+  claim: 120 粒子转为 12 节点需含名称+定义+边，能降低认知负荷
+  operational_definition: 节点数 12，每节点含 name/definition/edges 三字段；认知负荷用 NASA-TLX 测量。
+  baseline: 原文组（无结构）
+  control: 结构化组（12 节点）
+  sample_unit: participant
+  metric:
+    name: NASA-TLX
+    direction: decrease
+  threshold:
+    min_effect: 0.15
     alpha: 0.05
-    power_min: 0.80   # 仅在 H1 中显式给出
-  planned_equivalence_standard: "见 docs/equivalence-tests.md"
+  exclusion_rules:
+  - 阅读时间 < 10s
+  - 阅读时间 > 10min
+  analysis:
+    method: paired_t
+    pairing_key: participant_id
+  falsifier: 结构化组 NASA-TLX 下降 < 15%，或方向相反且 p < 0.05
+  inconclusive_if:
+  - missing:
+    - treatment_data
+    - control_data
+  - n: < 30
+    source: pilot_power_analysis
+    registered_at: '2026-10-18'
+  - metric_not_observed: true
+  toolkit_ref: toolkit/nasa_tlx/
+  evidence_ceiling: E2
+- id: L3-H1
+  scope: layer
+  layer: L3
+  status: draft
+  claim: 方向·价值·边界三角分桶能提升意义生成一致性
+  operational_definition: 三角分桶标注一致性用 Krippendorff's alpha
+  baseline: 无分桶（平面分类）
+  control: 三角分桶
+  sample_unit: annotation_item
+  metric:
+    name: krippendorff_alpha
+    direction: increase
+  threshold:
+    min_alpha: 0.67
+  exclusion_rules:
+  - 标注者 < 2 的 item 剔除
+  analysis:
+    method: alpha_with_bootstrap
+    n_boot: 1000
+  falsifier: 三角分桶 alpha < 0.67
+  inconclusive_if:
+  - missing:
+    - rater_id
+    - item_id
+    - category
+  - n_raters: < 2
+  toolkit_ref: toolkit/krippendorff_alpha/
+  evidence_ceiling: E1
+- id: L5-H1
+  scope: layer
+  layer: L5
+  status: draft
+  claim: 五尺度方向选择优于单尺度
+  operational_definition: 方向选择质量 = 与专家排序的 Brier 分数
+  baseline: 单尺度
+  control: 五尺度
+  sample_unit: decision_case
+  metric:
+    name: brier_score
+    direction: decrease
+  threshold:
+    max_brier: 0.2
+  exclusion_rules:
+  - 专家排序缺失的 case 剔除
+  analysis:
+    method: brier_with_ci
+    ci: 0.95
+  falsifier: 五尺度 Brier > 0.2 或不优于单尺度
+  inconclusive_if:
+  - missing:
+    - without_ring_scores
+    - with_ring_scores
+    - ground_truth
+  - n: < 20
+  toolkit_ref: toolkit/brier/
+  evidence_ceiling: E1
+- id: L2-H1
+  scope: layer
+  layer: L2
+  status: draft
+  claim: 可操作控件优于静态阅读
+  operational_definition: 操作完成率与理解测试分数
+  baseline: 静态阅读
+  control: 可操作控件
+  sample_unit: participant
+  metric:
+    name: comprehension_score
+    direction: increase
+  threshold:
+    min_effect: 0.2
+  exclusion_rules: []
+  analysis:
+    method: paired_t
+  falsifier: 控件组理解分不高于静态组
+  inconclusive_if:
+  - missing:
+    - treatment_data
+    - control_data
+  toolkit_ref: toolkit/comprehension/
+  evidence_ceiling: E1
+- id: L4-H1
+  scope: layer
+  layer: L4
+  status: draft
+  claim: E0-E6 证据色环能提升判断校准
+  operational_definition: 判断校准用 Brier 分数
+  baseline: 无证据标注
+  control: E0-E6 色环
+  sample_unit: judgment
+  metric:
+    name: brier_score
+    direction: decrease
+  threshold:
+    max_brier: 0.2
+  exclusion_rules: []
+  analysis:
+    method: brier_with_ci
+  falsifier: 色环组 Brier 不低于无标注组
+  inconclusive_if:
+  - missing:
+    - scores
+    - ground_truth
+  toolkit_ref: toolkit/brier/
+  evidence_ceiling: E2
+- id: L6-H1
+  scope: layer
+  layer: L6
+  status: draft
+  claim: 递归反思能发现单层遗漏的前提
+  operational_definition: 遗漏前提发现率（人工评审）
+  baseline: 无递归
+  control: max_depth=3 递归
+  sample_unit: review_case
+  metric:
+    name: missed_premise_rate
+    direction: decrease
+  threshold:
+    min_effect: 0.2
+  exclusion_rules:
+  - 递归未达 max_depth 的 case 剔除
+  analysis:
+    method: paired_t
+  falsifier: 递归组遗漏率不降低
+  inconclusive_if:
+  - missing:
+    - recursive_data
+    - baseline_data
+  toolkit_ref: toolkit/review/
+  evidence_ceiling: E1
+- id: S-H1
+  scope: stack
+  status: draft
+  claim: 六层联合（full_stack）在 value_assessment_coherence 上优于移除 L3 的消融变体（ABL-L3），效应量不低于
+    δ=0.3。
+  operational_definition: value_assessment_coherence = L4 输出与人工标注的一致性（Krippendorff's
+    alpha，多标注者）；整栈以 run 为单位，同一 input_id 下 full_stack 与 ABL-L3 配对执行。
+  baseline:
+    ref: config.json#/control_loop/ablation/ABL-L3
+  control: full_stack
+  sample_unit: run
+  metric:
+    name: value_assessment_coherence
+    statistic: krippendorff_alpha
+    direction: increase
+  threshold:
+    min_effect_size: 0.3
+    alpha: 0.05
+  exclusion_rules:
+  - input_id 在 full_stack 或 ABL-L3 任一缺失的配对整体剔除
+  - alpha 计算标注者 < 2 的 run 剔除
+  analysis:
+    design: paired
+    method: wilcoxon_signed_rank
+    pairing_key: input_id
+    multiple_comparison: holm
+  design: within-input A/B；pilot 阶段做功效分析定 min_n，预注册后冻结；正式实验按配对设计跑 full_stack vs ABL-L3。
+  falsifier: 配对检验下 full_stack 相对 ABL-L3 效应量 < 0.3，或方向相反且 p < 0.05。
+  inconclusive_if:
+  - n: < 40
+    source: pilot_power_analysis
+    registered_at: null
+    effect_size_assumed: 0.3
+    alpha: 0.05
+    power: 0.8
+  - missing:
+    - full_stack_data
+    - ablation_data
+  - metric_not_observed: true
+  toolkit_ref: toolkit/krippendorff_alpha/
+  evidence_ceiling: E3
