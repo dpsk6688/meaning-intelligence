@@ -1,110 +1,427 @@
 {
   "version": 2,
-  "languages": ["zh", "en"],
+  "languages": [
+    "zh",
+    "en"
+  ],
   "default_lang": "zh",
   "colors": {
-    "bg": "#0a0c10", "dark": "#141820", "gray": "#8b95a5", "cyan": "#00e5ff", "purple": "#bb86fc", "amber": "#ffd166", "white": "#ffffff",
-    "fill_gray": "#141820", "fill_cyan": "#0a1a20", "fill_purple": "#150e26", "fill_amber": "#241c08"
+    "bg": "#0a0c10",
+    "dark": "#141820",
+    "gray": "#8b95a5",
+    "cyan": "#00e5ff",
+    "purple": "#bb86fc",
+    "amber": "#ffd166",
+    "white": "#ffffff",
+    "fill_gray": "#141820",
+    "fill_cyan": "#0a1a20",
+    "fill_purple": "#150e26",
+    "fill_amber": "#241c08"
   },
-  "evidence_scale": ["#5b6472", "#6f86a8", "#4aa3df", "#00e5ff", "#3ddc97", "#a3e635", "#ffd166"],
+  "evidence_scale": [
+    "#5b6472",
+    "#6f86a8",
+    "#4aa3df",
+    "#00e5ff",
+    "#3ddc97",
+    "#a3e635",
+    "#ffd166"
+  ],
   "color_roles": {
-    "gray":   {"zh": "噪声 / 原始信息", "en": "Noise / raw information"},
-    "cyan":   {"zh": "界面带 · L1–L2", "en": "Interface band · L1–L2"},
-    "purple": {"zh": "加工带 · L3–L4", "en": "Processing band · L3–L4"},
-    "amber":  {"zh": "元带 · L5–L6", "en": "Meta band · L5–L6"}
+    "gray": {
+      "zh": "噪声 / 原始信息",
+      "en": "Noise / raw information"
+    },
+    "cyan": {
+      "zh": "界面带 · L1–L2",
+      "en": "Interface band · L1–L2"
+    },
+    "purple": {
+      "zh": "加工带 · L3–L4",
+      "en": "Processing band · L3–L4"
+    },
+    "amber": {
+      "zh": "元带 · L5–L6",
+      "en": "Meta band · L5–L6"
+    }
   },
   "fonts": {
-    "cjk":   ["Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei"],
-    "latin": ["Inter", "Helvetica Neue", "Arial", "DejaVu Sans"],
-    "mono":  ["JetBrains Mono", "Menlo", "Consolas", "DejaVu Sans Mono"]
+    "cjk": [
+      "Noto Sans CJK SC",
+      "Source Han Sans SC",
+      "PingFang SC",
+      "Microsoft YaHei",
+      "WenQuanYi Micro Hei"
+    ],
+    "latin": [
+      "Inter",
+      "Helvetica Neue",
+      "Arial",
+      "DejaVu Sans"
+    ],
+    "mono": [
+      "JetBrains Mono",
+      "Menlo",
+      "Consolas",
+      "DejaVu Sans Mono"
+    ]
   },
-  "video": {"file": "MeaningIntelligenceScene.mp4", "quality": "1080p60"},
-  "overload": {"count": 45, "seed": 42},
+  "video": {
+    "file": "MeaningIntelligenceScene.mp4",
+    "quality": "1080p60"
+  },
+  "overload": {
+    "count": 45,
+    "seed": 42
+  },
   "source_note": {
     "zh": "六层名称、锚点与证据等级取自 sara-protocol/meaning-intelligence 的 README(v0.2.0)。证伪条件为本项目的草案,尚未与其失败矩阵对齐。",
     "en": "Layer names, anchors and evidence levels follow the README of sara-protocol/meaning-intelligence (v0.2.0). Falsifiers are our own drafts, not yet aligned with its failure matrix."
   },
   "bands": [
-    {"id": "interface",  "tier": "cyan",   "layers": ["L1", "L2"], "label": {"zh": "界面带", "en": "Interface band"},  "problem": {"zh": "信息进不来", "en": "Information can't get in"}},
-    {"id": "processing", "tier": "purple", "layers": ["L3", "L4"], "label": {"zh": "加工带", "en": "Processing band"}, "problem": {"zh": "意义出不来", "en": "Meaning can't come out"}},
-    {"id": "meta",       "tier": "amber",  "layers": ["L5", "L6"], "label": {"zh": "元带", "en": "Meta band"},       "problem": {"zh": "方向守不住", "en": "Direction can't hold"}}
+    {
+      "id": "interface",
+      "tier": "cyan",
+      "layers": [
+        "L1",
+        "L2"
+      ],
+      "label": {
+        "zh": "界面带",
+        "en": "Interface band"
+      },
+      "problem": {
+        "zh": "信息进不来",
+        "en": "Information can't get in"
+      }
+    },
+    {
+      "id": "processing",
+      "tier": "purple",
+      "layers": [
+        "L3",
+        "L4"
+      ],
+      "label": {
+        "zh": "加工带",
+        "en": "Processing band"
+      },
+      "problem": {
+        "zh": "意义出不来",
+        "en": "Meaning can't come out"
+      }
+    },
+    {
+      "id": "meta",
+      "tier": "amber",
+      "layers": [
+        "L5",
+        "L6"
+      ],
+      "label": {
+        "zh": "元带",
+        "en": "Meta band"
+      },
+      "problem": {
+        "zh": "方向守不住",
+        "en": "Direction can't hold"
+      }
+    }
   ],
   "layers": [
-    {"id": "L1", "band": "interface",
-     "name": {"zh": "减负", "en": "Cognitive Load Reduction"},
-     "definition": {"zh": "把认知负荷从信息量转移到结构", "en": "Shift cognitive load from information volume to structure"},
-     "anchor": {"zh": "第1章 1.1;工具 A.1", "en": "Ch.1 §1.1; Tool A.1"},
-     "evidence": "E1(机制 E3)",
-     "falsifier": {"zh": "若结构化压缩后,读者的理解准确率与错误发现率不优于原文,则 L1 在该任务上失败。", "en": "If comprehension accuracy and error-detection after structured compression are no better than with the original text, L1 fails on that task."}},
-    {"id": "L2", "band": "interface",
-     "name": {"zh": "可体验", "en": "Experiential Rendering"},
-     "definition": {"zh": "把「读到」变成「操作到」", "en": "Turn \"read\" into \"operated\""},
-     "anchor": {"zh": "第3章;第9章 M1", "en": "Ch.3; Ch.9 M1"},
-     "evidence": "E1(机制 E3)",
-     "falsifier": {"zh": "若可操作版本相对静态版本在迁移任务上没有增益,则 L2 失败。", "en": "If the operable version yields no gain over the static version on transfer tasks, L2 fails."}},
-    {"id": "L3", "band": "processing",
-     "name": {"zh": "意义生成", "en": "Meaning Generation"},
-     "definition": {"zh": "组织成方向·价值·边界", "en": "Organise into direction · value · boundary"},
-     "anchor": {"zh": "第3章 3.1 / 3.2;第8章 8.1 光谱带", "en": "Ch.3 §3.1/3.2; Ch.8 §8.1 spectrum band"},
-     "evidence": "E0–E1",
-     "falsifier": {"zh": "若独立标注者无法把同一材料稳定归入方向、价值、边界(一致性低于预设阈值),则 L3 失败。", "en": "If independent raters cannot sort the same material into direction/value/boundary consistently (agreement below a preset threshold), L3 fails."}},
-    {"id": "L4", "band": "processing",
-     "name": {"zh": "价值评估", "en": "Value Assessment"},
-     "definition": {"zh": "为判断标注证据强度", "en": "Label every judgement with its strength of evidence"},
-     "anchor": {"zh": "第6章 E0–E6;3.3 PE 方程", "en": "Ch.6 E0–E6; §3.3 PE equation"},
-     "evidence": "E2(工具)/ E1(模型)",
-     "falsifier": {"zh": "若证据等级标注在评审者之间不一致,或与后续检验结果无单调关系,则 L4 失败。", "en": "If evidence grades disagree across reviewers, or bear no monotone relation to later test outcomes, L4 fails."}},
-    {"id": "L5", "band": "meta",
-     "name": {"zh": "方向选择", "en": "Direction Selection"},
-     "definition": {"zh": "在五尺度上选定值得的方向", "en": "Choose the worthwhile direction across five scales"},
-     "anchor": {"zh": "第4章;DC 指标;三级修正", "en": "Ch.4; DC index; three-level correction"},
-     "evidence": "E1",
-     "falsifier": {"zh": "若按该层选出的方向在事后评估中不优于基线或随机选择,则 L5 失败。", "en": "If directions chosen by this layer do no better than a baseline or random choice in post-hoc evaluation, L5 fails."}},
-    {"id": "L6", "band": "meta",
-     "name": {"zh": "反思与审视递归", "en": "Recursive Reflection and Review"},
-     "definition": {"zh": "让系统审视自己的审视", "en": "Let the system review its own reviewing"},
-     "anchor": {"zh": "第7章 7B.2/7B.3/7B.4;失败矩阵", "en": "Ch.7 §7B.2/7B.3/7B.4; failure matrix"},
-     "evidence": "E2(案例)/ E1",
-     "falsifier": {"zh": "若递归审视在后续轮次中没有比无审视对照更高的纠错率,则 L6 失败。", "en": "If recursive review does not correct earlier errors at a higher rate than a no-review control in later rounds, L6 fails."}}
+    {
+      "id": "L1",
+      "band": "interface",
+      "name": {
+        "zh": "减负",
+        "en": "Cognitive Load Reduction"
+      },
+      "definition": {
+        "zh": "把认知负荷从信息量转移到结构",
+        "en": "Shift cognitive load from information volume to structure"
+      },
+      "anchor": {
+        "zh": "第1章 1.1;工具 A.1",
+        "en": "Ch.1 §1.1; Tool A.1"
+      },
+      "evidence": "E1(机制 E3)",
+      "falsifier": {
+        "zh": "若结构化压缩后,读者的理解准确率与错误发现率不优于原文,则 L1 在该任务上失败。",
+        "en": "If comprehension accuracy and error-detection after structured compression are no better than with the original text, L1 fails on that task."
+      }
+    },
+    {
+      "id": "L2",
+      "band": "interface",
+      "name": {
+        "zh": "可体验",
+        "en": "Experiential Rendering"
+      },
+      "definition": {
+        "zh": "把「读到」变成「操作到」",
+        "en": "Turn \"read\" into \"operated\""
+      },
+      "anchor": {
+        "zh": "第3章;第9章 M1",
+        "en": "Ch.3; Ch.9 M1"
+      },
+      "evidence": "E1(机制 E3)",
+      "falsifier": {
+        "zh": "若可操作版本相对静态版本在迁移任务上没有增益,则 L2 失败。",
+        "en": "If the operable version yields no gain over the static version on transfer tasks, L2 fails."
+      }
+    },
+    {
+      "id": "L3",
+      "band": "processing",
+      "name": {
+        "zh": "意义生成",
+        "en": "Meaning Generation"
+      },
+      "definition": {
+        "zh": "组织成方向·价值·边界",
+        "en": "Organise into direction · value · boundary"
+      },
+      "anchor": {
+        "zh": "第3章 3.1 / 3.2;第8章 8.1 光谱带",
+        "en": "Ch.3 §3.1/3.2; Ch.8 §8.1 spectrum band"
+      },
+      "evidence": "E0–E1",
+      "falsifier": {
+        "zh": "若独立标注者无法把同一材料稳定归入方向、价值、边界(一致性低于预设阈值),则 L3 失败。",
+        "en": "If independent raters cannot sort the same material into direction/value/boundary consistently (agreement below a preset threshold), L3 fails."
+      }
+    },
+    {
+      "id": "L4",
+      "band": "processing",
+      "name": {
+        "zh": "价值评估",
+        "en": "Value Assessment"
+      },
+      "definition": {
+        "zh": "为判断标注证据强度",
+        "en": "Label every judgement with its strength of evidence"
+      },
+      "anchor": {
+        "zh": "第6章 E0–E6;3.3 PE 方程",
+        "en": "Ch.6 E0–E6; §3.3 PE equation"
+      },
+      "evidence": "E2(工具)/ E1(模型)",
+      "falsifier": {
+        "zh": "若证据等级标注在评审者之间不一致,或与后续检验结果无单调关系,则 L4 失败。",
+        "en": "If evidence grades disagree across reviewers, or bear no monotone relation to later test outcomes, L4 fails."
+      }
+    },
+    {
+      "id": "L5",
+      "band": "meta",
+      "name": {
+        "zh": "方向选择",
+        "en": "Direction Selection"
+      },
+      "definition": {
+        "zh": "在五尺度上选定值得的方向",
+        "en": "Choose the worthwhile direction across five scales"
+      },
+      "anchor": {
+        "zh": "第4章;DC 指标;三级修正",
+        "en": "Ch.4; DC index; three-level correction"
+      },
+      "evidence": "E1",
+      "falsifier": {
+        "zh": "若按该层选出的方向在事后评估中不优于基线或随机选择,则 L5 失败。",
+        "en": "If directions chosen by this layer do no better than a baseline or random choice in post-hoc evaluation, L5 fails."
+      }
+    },
+    {
+      "id": "L6",
+      "band": "meta",
+      "name": {
+        "zh": "反思与审视递归",
+        "en": "Recursive Reflection and Review"
+      },
+      "definition": {
+        "zh": "让系统审视自己的审视",
+        "en": "Let the system review its own reviewing"
+      },
+      "anchor": {
+        "zh": "第7章 7B.2/7B.3/7B.4;失败矩阵",
+        "en": "Ch.7 §7B.2/7B.3/7B.4; failure matrix"
+      },
+      "evidence": "E2(案例)/ E1",
+      "falsifier": {
+        "zh": "若递归审视在后续轮次中没有比无审视对照更高的纠错率,则 L6 失败。",
+        "en": "If recursive review does not correct earlier errors at a higher rate than a no-review control in later rounds, L6 fails."
+      }
+    }
   ],
   "acts": [
-    {"id": "overload", "layer": "L1", "tier": "gray", "enter": 1.2, "hold": 1.0,
-     "label": {"zh": "信息洪流", "en": "Information Overload"},
-     "desc":  {"zh": "info. info. info. ...", "en": "info. info. info. ..."},
-     "scene": {"zh": "信息过载:{count} 条随机文本", "en": "Overload: {count} random text fragments"}},
-    {"id": "text", "layer": "L1", "tier": "cyan", "enter": 3.0, "hold": 2.0,
-     "label": {"zh": "文本降维", "en": "Text Reduction"},
-     "desc":  {"zh": "ASD-STE100 受控语言", "en": "ASD-STE100 controlled language"},
-     "scene": {"zh": "汇聚为一点 → 提炼三条核心语句", "en": "Collapse to a point → three core statements"}},
-    {"id": "diagram", "layer": "L1", "tier": "cyan", "enter": 1.8, "hold": 2.0,
-     "label": {"zh": "结构图", "en": "Structure Diagram"},
-     "desc":  {"zh": "节点 + 关系", "en": "Nodes + relations"},
-     "scene": {"zh": "转换为节点与箭头图", "en": "Converted to a node-and-arrow graph"}},
-    {"id": "interactive", "layer": "L2", "tier": "cyan", "enter": 4.0, "hold": 1.5,
-     "label": {"zh": "可操作界面", "en": "Operable Interface"},
-     "desc":  {"zh": "网页 / 滑块 / 参数调节", "en": "Web page / slider / parameters"},
-     "scene": {"zh": "浏览器窗口 + 滑块拖动", "en": "Browser window + slider drag"}},
-    {"id": "meaning", "layer": "L3", "tier": "purple", "enter": 3.5, "hold": 2.0,
-     "label": {"zh": "意义归位", "en": "Meaning Placement"},
-     "desc":  {"zh": "方向 · 价值 · 边界", "en": "Direction · value · boundary"},
-     "scene": {"zh": "散点节点归位到方向·价值·边界三角", "en": "Scattered nodes settle into the direction·value·boundary triangle"}},
-    {"id": "assess", "layer": "L4", "tier": "purple", "enter": 3.0, "hold": 2.0,
-     "label": {"zh": "证据着色", "en": "Evidence Rings"},
-     "desc":  {"zh": "E0–E6 证据色环", "en": "E0–E6 evidence rings"},
-     "scene": {"zh": "每个节点套上证据色环(示意)", "en": "Each node gets an evidence ring (illustrative)"}},
-    {"id": "select", "layer": "L5", "tier": "amber", "enter": 3.5, "hold": 2.0,
-     "label": {"zh": "路径选择", "en": "Path Selection"},
-     "desc":  {"zh": "三选一,其余淡出", "en": "One of three; the rest fade"},
-     "scene": {"zh": "三条候选路径,两条淡出,一条高亮", "en": "Three candidate paths: two fade, one is highlighted"}},
-    {"id": "reflect", "layer": "L6", "tier": "amber", "enter": 4.5, "hold": 2.0,
-     "label": {"zh": "递归螺旋", "en": "Recursive Spiral"},
-     "desc":  {"zh": "回写至更高起点 L1′ + 监督之眼", "en": "Return to higher start L1′ + overseeing eye"},
-     "scene": {"zh": "螺旋回写至同角度的更高起点 L1′,监督之眼审视整圈", "en": "Spiral returns to a higher start L1′ at the same angle; the eye reviews the whole loop"}}
+    {
+      "id": "overload",
+      "layer": "L1",
+      "tier": "gray",
+      "enter": 1.2,
+      "hold": 1.0,
+      "label": {
+        "zh": "信息洪流",
+        "en": "Information Overload"
+      },
+      "desc": {
+        "zh": "info. info. info. ...",
+        "en": "info. info. info. ..."
+      },
+      "scene": {
+        "zh": "信息过载:{count} 条随机文本",
+        "en": "Overload: {count} random text fragments"
+      }
+    },
+    {
+      "id": "text",
+      "layer": "L1",
+      "tier": "cyan",
+      "enter": 3.0,
+      "hold": 2.0,
+      "label": {
+        "zh": "文本降维",
+        "en": "Text Reduction"
+      },
+      "desc": {
+        "zh": "ASD-STE100 受控语言",
+        "en": "ASD-STE100 controlled language"
+      },
+      "scene": {
+        "zh": "汇聚为一点 → 提炼三条核心语句",
+        "en": "Collapse to a point → three core statements"
+      }
+    },
+    {
+      "id": "diagram",
+      "layer": "L1",
+      "tier": "cyan",
+      "enter": 1.8,
+      "hold": 2.0,
+      "label": {
+        "zh": "结构图",
+        "en": "Structure Diagram"
+      },
+      "desc": {
+        "zh": "节点 + 关系",
+        "en": "Nodes + relations"
+      },
+      "scene": {
+        "zh": "转换为节点与箭头图",
+        "en": "Converted to a node-and-arrow graph"
+      }
+    },
+    {
+      "id": "interactive",
+      "layer": "L2",
+      "tier": "cyan",
+      "enter": 4.0,
+      "hold": 1.5,
+      "label": {
+        "zh": "可操作界面",
+        "en": "Operable Interface"
+      },
+      "desc": {
+        "zh": "网页 / 滑块 / 参数调节",
+        "en": "Web page / slider / parameters"
+      },
+      "scene": {
+        "zh": "浏览器窗口 + 滑块拖动",
+        "en": "Browser window + slider drag"
+      }
+    },
+    {
+      "id": "meaning",
+      "layer": "L3",
+      "tier": "purple",
+      "enter": 3.5,
+      "hold": 2.0,
+      "label": {
+        "zh": "意义归位",
+        "en": "Meaning Placement"
+      },
+      "desc": {
+        "zh": "方向 · 价值 · 边界",
+        "en": "Direction · value · boundary"
+      },
+      "scene": {
+        "zh": "散点节点归位到方向·价值·边界三角",
+        "en": "Scattered nodes settle into the direction·value·boundary triangle"
+      }
+    },
+    {
+      "id": "assess",
+      "layer": "L4",
+      "tier": "purple",
+      "enter": 3.0,
+      "hold": 2.0,
+      "label": {
+        "zh": "证据着色",
+        "en": "Evidence Rings"
+      },
+      "desc": {
+        "zh": "E0–E6 证据色环",
+        "en": "E0–E6 evidence rings"
+      },
+      "scene": {
+        "zh": "每个节点套上证据色环(示意)",
+        "en": "Each node gets an evidence ring (illustrative)"
+      }
+    },
+    {
+      "id": "select",
+      "layer": "L5",
+      "tier": "amber",
+      "enter": 3.5,
+      "hold": 2.0,
+      "label": {
+        "zh": "路径选择",
+        "en": "Path Selection"
+      },
+      "desc": {
+        "zh": "三选一,其余淡出",
+        "en": "One of three; the rest fade"
+      },
+      "scene": {
+        "zh": "三条候选路径,两条淡出,一条高亮",
+        "en": "Three candidate paths: two fade, one is highlighted"
+      }
+    },
+    {
+      "id": "reflect",
+      "layer": "L6",
+      "tier": "amber",
+      "enter": 4.5,
+      "hold": 2.0,
+      "label": {
+        "zh": "递归螺旋",
+        "en": "Recursive Spiral"
+      },
+      "desc": {
+        "zh": "回写至更高起点 L1′ + 监督之眼",
+        "en": "Return to higher start L1′ + overseeing eye"
+      },
+      "scene": {
+        "zh": "螺旋回写至同角度的更高起点 L1′,监督之眼审视整圈",
+        "en": "Spiral returns to a higher start L1′ at the same angle; the eye reviews the whole loop"
+      }
+    }
   ],
   "final": {
-    "id": "final", "enter": 1.8, "hold": 2.5,
-    "label": {"zh": "Meaning Intelligence", "en": "Meaning Intelligence"},
-    "scene": {"zh": "渐变标题落幕", "en": "Gradient title card"}
+    "id": "final",
+    "enter": 1.8,
+    "hold": 2.5,
+    "label": {
+      "zh": "Meaning Intelligence",
+      "en": "Meaning Intelligence"
+    },
+    "scene": {
+      "zh": "渐变标题落幕",
+      "en": "Gradient title card"
+    }
   },
   "content": {
     "overload_text": {
@@ -112,18 +429,70 @@
       "en": "Explosive AI-generated content leads to severe cognitive information overload. Human attention is fragmented across vast text streams. Extracting core meaning and staying in the loop is essential..."
     },
     "ste_lines": {
-      "zh": ["信息过载", "人类阅读困难", "提取核心意义"],
-      "en": ["Information Overload", "Cognitive Bottleneck", "Extracting Meaning"]
+      "zh": [
+        "信息过载",
+        "人类阅读困难",
+        "提取核心意义"
+      ],
+      "en": [
+        "Information Overload",
+        "Cognitive Bottleneck",
+        "Extracting Meaning"
+      ]
     },
-    "node1": {"zh": "原始信息", "en": "Raw Information"},
-    "node2": {"zh": "降维处理", "en": "Reduction"},
-    "axes": {"zh": ["方向", "价值", "边界"], "en": ["Direction", "Value", "Boundary"]},
-    "candidates": {"zh": ["路径 A", "路径 B", "路径 C"], "en": ["Path A", "Path B", "Path C"]},
-    "illustrative": {"zh": "示意 · 色环不代表真实评级", "en": "Illustrative · rings are not real ratings"},
-    "supervisor": {"zh": "抽象监督与意义提取", "en": "Abstract Supervision & Meaning Extraction"}
+    "node1": {
+      "zh": "原始信息",
+      "en": "Raw Information"
+    },
+    "node2": {
+      "zh": "降维处理",
+      "en": "Reduction"
+    },
+    "axes": {
+      "zh": [
+        "方向",
+        "价值",
+        "边界"
+      ],
+      "en": [
+        "Direction",
+        "Value",
+        "Boundary"
+      ]
+    },
+    "candidates": {
+      "zh": [
+        "路径 A",
+        "路径 B",
+        "路径 C"
+      ],
+      "en": [
+        "Path A",
+        "Path B",
+        "Path C"
+      ]
+    },
+    "illustrative": {
+      "zh": "示意 · 色环不代表真实评级",
+      "en": "Illustrative · rings are not real ratings"
+    },
+    "supervisor": {
+      "zh": "抽象监督与意义提取",
+      "en": "Abstract Supervision & Meaning Extraction"
+    }
   },
   "demo": {
-    "assess_levels": [0, 1, 1, 2, 3, 2, 1, 4, 2],
+    "assess_levels": [
+      0,
+      1,
+      1,
+      2,
+      3,
+      2,
+      1,
+      4,
+      2
+    ],
     "chosen_path": 1
   },
   "ui": {
@@ -131,18 +500,35 @@
       "title": "意义智能 (Meaning Intelligence)",
       "subtitle": "六层应用栈:从减负到反思与审视递归",
       "langBtn": "English",
-      "tabs": ["📹 渲染视频", "🎚 六层演示", "📊 逻辑图表", "💻 源码与配置"],
+      "tabs": [
+        "📹 渲染视频",
+        "🎚 六层演示",
+        "📊 逻辑图表",
+        "💻 源码与配置"
+      ],
       "videoDesc": "3B1B 风格渲染",
       "videoMissing": "未找到视频文件,请先运行 manim 渲染,并将 mp4 放在本页同目录。",
-      "timelineSrc": {"measured": "时间轴:渲染实测", "planned": "时间轴:配置推算(渲染后将自动被实测值取代)"},
+      "timelineSrc": {
+        "measured": "时间轴:渲染实测",
+        "planned": "时间轴:配置推算(渲染后将自动被实测值取代)"
+      },
       "playStage": "▶ 在视频中播放此层",
       "canvasHint": "调节无序度,观察粒子从混乱收敛为结构:",
       "entropy": "无序度 (Entropy)",
       "pickPath": "点击候选路径,其余淡出:",
       "recursion": "L6 回写至更高起点 L1′",
       "mermaidFail": "Mermaid 库未能加载(离线?),以下为图表源码:",
-      "diagrams": ["六层应用栈", "场景结构", "视觉编码规范"],
-      "card": {"band": "所属带", "anchor": "锚定正典", "evidence": "证据等级", "falsifier": "什么会让它作废(草案)"},
+      "diagrams": [
+        "六层应用栈",
+        "场景结构",
+        "视觉编码规范"
+      ],
+      "card": {
+        "band": "所属带",
+        "anchor": "锚定正典",
+        "evidence": "证据等级",
+        "falsifier": "什么会让它作废(草案)"
+      },
       "srcPy": "meaning_intelligence.py",
       "srcCfg": "config.json"
     },
@@ -150,20 +536,85 @@
       "title": "Meaning Intelligence",
       "subtitle": "The six-layer stack: from load reduction to recursive review",
       "langBtn": "中文",
-      "tabs": ["📹 Rendered Video", "🎚 Six-Layer Demo", "📊 Logic Diagram", "💻 Source & Config"],
+      "tabs": [
+        "📹 Rendered Video",
+        "🎚 Six-Layer Demo",
+        "📊 Logic Diagram",
+        "💻 Source & Config"
+      ],
       "videoDesc": "3B1B-style render",
       "videoMissing": "Video file not found. Render with manim and place the mp4 next to this page.",
-      "timelineSrc": {"measured": "Timeline: measured from render", "planned": "Timeline: planned from config (replaced by measured values after rendering)"},
+      "timelineSrc": {
+        "measured": "Timeline: measured from render",
+        "planned": "Timeline: planned from config (replaced by measured values after rendering)"
+      },
       "playStage": "▶ Play this layer in the video",
       "canvasHint": "Adjust entropy to watch particles converge into structure:",
       "entropy": "Entropy",
       "pickPath": "Click a candidate path; the others fade:",
       "recursion": "L6 returns to a higher start, L1′",
       "mermaidFail": "Mermaid failed to load (offline?). Diagram source:",
-      "diagrams": ["Six-layer stack", "Scene structure", "Visual encoding"],
-      "card": {"band": "Band", "anchor": "Canon anchor", "evidence": "Evidence level", "falsifier": "What would falsify it (draft)"},
+      "diagrams": [
+        "Six-layer stack",
+        "Scene structure",
+        "Visual encoding"
+      ],
+      "card": {
+        "band": "Band",
+        "anchor": "Canon anchor",
+        "evidence": "Evidence level",
+        "falsifier": "What would falsify it (draft)"
+      },
       "srcPy": "meaning_intelligence.py",
       "srcCfg": "config.json"
+    }
+  },
+  "schema_version": "0.3.0",
+  "control_loop": {
+    "can_rewrite_lower": [
+      "meta"
+    ],
+    "evidence_levels": {
+      "E0": {
+        "color": "#9e9e9e",
+        "whitepaper_ref": "#evidence-E0"
+      },
+      "E1": {
+        "color": "#64b5f6",
+        "whitepaper_ref": "#evidence-E1"
+      },
+      "E2": {
+        "color": "#42a5f5",
+        "whitepaper_ref": "#evidence-E2"
+      },
+      "E3": {
+        "color": "#1e88e5",
+        "whitepaper_ref": "#evidence-E3"
+      },
+      "E4": {
+        "color": "#1565c0",
+        "whitepaper_ref": "#evidence-E4"
+      },
+      "E5": {
+        "color": "#0d47a1",
+        "whitepaper_ref": "#evidence-E5"
+      },
+      "E6": {
+        "color": "#002171",
+        "whitepaper_ref": "#evidence-E6"
+      }
+    },
+    "ablation": {
+      "ABL-L3": {
+        "description": "移除 L3 generate_meaning，L2 输出直连 L4",
+        "overrides": {
+          "L3": null
+        },
+        "expected_effect": "value_assessment 失去意义分桶输入",
+        "hypotheses": [
+          "S-H1"
+        ]
+      }
     }
   }
 }
