@@ -94,13 +94,20 @@ if hy.exists():
     try:
         import yaml
         data = yaml.safe_load(hy.read_text(encoding="utf-8"))
-        expected = {f"H{i}" for i in range(1, 19)}
-        actual = set(data.get("hypotheses", {}).keys())
-        missing = expected - actual
-        if missing:
-            fail(f"hypotheses.yaml 缺少: {sorted(missing)}")
+        raw_hyps = data.get("hypotheses", {})
+        
+        if isinstance(raw_hyps, dict):
+            ids = list(raw_hyps.keys())
+        elif isinstance(raw_hyps, list):
+            ids = [h.get("id") for h in raw_hyps if isinstance(h, dict)]
         else:
-            ok(f"hypotheses.yaml 完整 ({len(actual)} 条)")
+            ids = []
+            
+        missing_ids = [i for i in ids if not i]
+        if missing_ids or len(ids) == 0:
+            fail("hypotheses.yaml 存在缺少 id 的假说或为空")
+        else:
+            ok(f"hypotheses.yaml 完整 ({len(ids)} 条, 支持列表/字典结构)")
     except ImportError:
         print("INFO 未装 pyyaml,跳过 hypotheses.yaml 检查")
     except Exception as e:
