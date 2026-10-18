@@ -114,9 +114,21 @@
             <option value="ollama">本地 Ollama (开发者)</option>
         </select>
         <div id="configGithub">
-            <label>GitHub Personal Access Token</label>
-            <input type="password" id="ghToken" placeholder="github_pat_...">
-            <p class="tip">用于调用免费的 gpt-4o-mini。仅需基础权限。</p>
+            <label>GitHub Token（免费 AI 引擎）</label>
+            <input type="password" id="ghToken" placeholder="github_pat_..." style="margin-bottom: 10px;">
+            
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid var(--accent); padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: #e2e8f0;">
+                    <strong>🛡️ 为什么需要它？</strong><br>
+                    为了不花钱就能用 AI，系统调用 GitHub 的免费模型。Token 仅在您的本地浏览器中保存，绝不经过第三方服务器。
+                </p>
+                <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: bold;">
+                    🔗 一键去 GitHub 生成 Token
+                </a>
+                <p style="margin: 8px 0 0 0; font-size: 0.8rem; color: #94a3b8;">
+                    👉 生成时只需在“Account permissions”中勾选 <strong>Models (Read-only)</strong> 即可。
+                </p>
+            </div>
         </div>
         <div id="configOllama" style="display:none;">
             <label>Ollama 模型名称</label>
