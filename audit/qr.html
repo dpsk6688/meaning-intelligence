@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫码使用 MI 自检助手</title>
+    <style>
+        body { font-family: sans-serif; background: #0f1115; color: #e2e8f0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        .qr-box { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 20px; }
+        h2 { color: #3b82f6; font-weight: 300; }
+    </style>
+</head>
+<body>
+    <h2>📱 扫码立即使用</h2>
+    <div class="qr-box">
+        <!-- 使用 api.qrserver.com 在线生成当前域名 audit/ 路径的二维码 -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fsara-protocol.github.io%2Fmeaning-intelligence%2Faudit%2F" alt="QR Code" />
+    </div>
+    <p>无需下载，随时复盘</p>
+    <a href="./" style="color:#3b82f6; margin-top:20px; text-decoration:none;">或直接进入网页版 &rarr;</a>
+</body>
+</html>
