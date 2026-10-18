@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meaning-intelligence"
+version = "0.3.0"
+description = "Meaning Intelligence SDK"
+requires-python = ">=3.10"
+dependencies = ["pyyaml>=6.0"]
+
+[project.scripts]
+mi = "meaning_intelligence.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["meaning_intelligence*"]
