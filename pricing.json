@@ -1,0 +1,43 @@
+{
+  "usdt_address": "0x05761494aff51283651a470c53dd4954b5",
+  "network": "ERC20 / USDT",
+  "plans": [
+    {
+      "id": "monthly",
+      "name": "月度会员",
+      "price": "9 USDT/月",
+      "usdt": 9,
+      "benefits": [
+        "全文阅读",
+        "三合一下载包(PPTX+Word+PDF)",
+        "语音朗读",
+        "中英双语字幕"
+      ]
+    },
+    {
+      "id": "yearly",
+      "name": "年度会员",
+      "price": "99 USDT/年",
+      "usdt": 99,
+      "benefits": [
+        "含月度全部",
+        "L1-L6代码库",
+        "私有MCP Server",
+        "A2A协作配置",
+        "GitHub私有库访问"
+      ]
+    },
+    {
+      "id": "lifetime",
+      "name": "一次性订阅",
+      "price": "199 USDT",
+      "usdt": 199,
+      "benefits": [
+        "终身三合一下载包",
+        "永久更新",
+        "语音电子书离线版",
+        "可商用授权"
+      ]
+    }
+  ]
+}
