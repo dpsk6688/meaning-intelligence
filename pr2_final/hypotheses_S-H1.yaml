@@ -1,0 +1,89 @@
+schema_version: "0.3.0"
+source_video: "https://www.youtube.com/watch?v=4l0SZxK0qfY"
+hypotheses:
+  - id: S-H1
+    scope: stack
+    status: registered
+    title: "时空掠夺主假说"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L3}
+    unit_of_analysis: run
+    evidence_ceiling: E3
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "Harvey 1989 + EP57"}]
+  - id: H-0000
+    scope: stack
+    layer: L2
+    status: registered
+    title: "00:00 人生迷茫"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L1}
+    unit_of_analysis: self_report
+    evidence_ceiling: E2
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 00:00"}]
+  - id: H-0121
+    scope: stack
+    layer: L6
+    status: registered
+    title: "01:21 精神内耗"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L6}
+    unit_of_analysis: run
+    evidence_ceiling: E2
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 01:21"}]
+  - id: H-0444
+    scope: stack
+    status: registered
+    title: "04:44 财富觉醒"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L4}
+    unit_of_analysis: run
+    evidence_ceiling: E3
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 04:44"}]
+  - id: H-1314
+    scope: stack
+    status: registered
+    title: "13:14 认知觉醒时空压缩"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L3}
+    unit_of_analysis: run
+    evidence_ceiling: E3
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 13:14"}]
+  - id: H-2041
+    scope: stack
+    layer: L6
+    status: registered
+    title: "20:41 私人博物馆"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L6}
+    unit_of_analysis: run
+    evidence_ceiling: E2
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 20:41"}]
+  - id: H-2341
+    scope: stack
+    status: registered
+    title: "23:41 网红地标洗劫"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L3}
+    unit_of_analysis: run
+    evidence_ceiling: E3
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 23:41"}]
+  - id: H-3406
+    scope: stack
+    status: registered
+    title: "34:06 自我反思 A/B抉择"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L3}
+    unit_of_analysis: run
+    evidence_ceiling: E3
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 34:06"}]
+  - id: H-4343
+    scope: stack
+    status: registered
+    title: "43:43 夺回主权3解药"
+    baseline: {ref: config.json#/control_loop/ablation/ABL-L3}
+    unit_of_analysis: run
+    evidence_ceiling: E3
+    inconclusive_if: [{n: 40, registered_at: "2026-10-22", source: "EP57 43:43"}]
+control_loop:
+  ablation:
+    ABL-L1: {hypotheses: [H-0000], overrides: {L1: {}}}
+    ABL-L3: {hypotheses: [S-H1, H-1314, H-2341, H-3406, H-4343], overrides: {L3: null}}
+    ABL-L4: {hypotheses: [S-H1, H-0444], overrides: {L4: {}}}
+    ABL-L6: {hypotheses: [H-0121, H-2041], overrides: {L6: {}}}
+  evidence_levels:
+    E0: {color: "#9e9e9e", whitepaper_ref: "第6章 E0"}
+    E1: {color: "#ef5350", whitepaper_ref: "第6章 E1"}
+    E2: {color: "#ff9800", whitepaper_ref: "第6章 E2"}
+    E3: {color: "#1e88e5", whitepaper_ref: "第6章 E3 Harvey时空压缩"}
